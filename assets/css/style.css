@@ -419,35 +419,31 @@ section .container {
 }
 
 /*--------------------------------------------------------------
-# Portfolio
+# Projects
 --------------------------------------------------------------*/
-.portfolio-details-card {
+.projects-details-card {
   background: rgba(255, 255, 255, 0.08);
   border-radius: 10px;
   transition: 0.3s ease;
 }
-.portfolio-details-card:hover {
+.projects-details-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 12px rgba(24, 210, 110, 0.4);
 }
-.portfolio-details-card h2 {
+.projects-details-card h2 {
   color: #D4A853;
 }
-.portfolio-details-card a {
+.projects-details-card a {
   color: #D4A853;
   transition: 0.3s;
 }
-.portfolio-details-card a:hover {
+.projects-details-card a:hover {
   color: #D4A853;
 }
 
 /*--------------------------------------------------------------
 # Certificates
 --------------------------------------------------------------*/
-.Certificates {
-  padding: 70px 0 60px;
-}
-
 .Certificates .certificates-details-card {
   background: rgba(255, 255, 255, 0.08);
   border-radius: 10px;

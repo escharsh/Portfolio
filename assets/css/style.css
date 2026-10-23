@@ -8,7 +8,7 @@ body {
 body::before {
   content: "";
   position: fixed;
-  background: #050505 url("../img/background/waves.gif") top right no-repeat;
+  background: #050505 url("../img/background/B&W.gif") top right no-repeat;
   background-size: cover;
   left: 0;
   right: 0;
@@ -203,9 +203,6 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff;
 }
 
-.download_btn{
-  font-size: 20px;
-}
 /**
 * Mobile Navigation 
 */
@@ -331,56 +328,126 @@ section .container {
 /*--------------------------------------------------------------
 # About
 --------------------------------------------------------------*/
+
+.about-me {
+  padding-top: 30px;
+}
+
 .about-me .content h3 {
   font-weight: 700;
   font-size: 26px;
   color: #D4A853;
-}
-.about-me .content ul {
-  list-style: none;
-  padding: 0;
-}
-.about-me .content ul li {
   margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-}
-.about-me .content ul i {
-  font-size: 16px;
-  margin-right: 5px;
-  color: #D4A853;
-}
-.about-me .content p:last-child {
-  margin-bottom: 0;
 }
 
-/*--------------------------------------------------------------
-# Counts
---------------------------------------------------------------*/
-.counts {
-  padding: 70px 0 60px;
-}
-.counts .count-box {
-  padding: 30px;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.08);
-}
-.counts .count-box i {
-  font-size: 24px;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 12px;
-  color: #D4A853;
-  border-radius: 50%;
-}
-.counts .count-box span {
-  font-size: 36px;
-  display: block;
+.about-me .content h4 {
+  font-size: 19px;
   font-weight: 600;
+  color: #D4A853;
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+.about-me .content p {
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 18px;
+}
+
+.about-skills {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.about-skills li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+
+.about-skills li i {
+  color: #D4A853;
+  font-size: 17px;
+  margin-top: 4px;
+}
+
+.about-skills strong {
   color: #fff;
 }
+
+.about-links {
+  margin-top: 25px;
+}
+
+.about-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  color: #D4A853;
+  border: 1px solid #D4A853;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.about-btn:hover {
+  color: #151515;
+  background: #D4A853;
+}
+
+/* Statistics */
+.counts {
+  padding: 50px 0 60px;
+}
+
+.counts .count-box {
+  height: 100%;
+  padding: 30px 20px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(212, 168, 83, 0.15);
+  border-radius: 10px;
+  transition: transform 0.3s ease,
+              border-color 0.3s ease;
+}
+
+.counts .count-box:hover {
+  transform: translateY(-5px);
+  border-color: #D4A853;
+}
+
+.counts .count-box i {
+  display: inline-block;
+  font-size: 25px;
+  padding: 13px;
+  margin-bottom: 12px;
+  color: #D4A853;
+  background: rgba(212, 168, 83, 0.1);
+  border-radius: 50%;
+}
+
+.counts .count-box span {
+  display: block;
+  font-size: 30px;
+  font-weight: 700;
+  color: #fff;
+  margin: 8px 0;
+}
+
 .counts .count-box p {
-  font-family: "Raleway", sans-serif;
   font-size: 14px;
+  margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+@media (max-width: 576px) {
+  .about-me .content h3 {
+    font-size: 22px;
+  }
 }
 
 /*--------------------------------------------------------------
@@ -421,23 +488,23 @@ section .container {
 /*--------------------------------------------------------------
 # Projects
 --------------------------------------------------------------*/
-.projects-details-card {
+.portfolio-details-card {
   background: rgba(255, 255, 255, 0.08);
   border-radius: 10px;
   transition: 0.3s ease;
 }
-.projects-details-card:hover {
+.portfolio-details-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 12px rgba(24, 210, 110, 0.4);
 }
-.projects-details-card h2 {
+.portfolio-details-card h2 {
   color: #D4A853;
 }
-.projects-details-card a {
+.portfolio-details-card a {
   color: #D4A853;
   transition: 0.3s;
 }
-.projects-details-card a:hover {
+.portfolio-details-card a:hover {
   color: #D4A853;
 }
 
@@ -463,19 +530,6 @@ section .container {
   width: 100%;
   height: auto;
   transition: 0.3s ease;
-}
-
-.Certificates .certificates-details-card h3 {
-  font-size: 20px;
-  color: #D4A853;
-  font-weight: 600;
-  margin-top: 10px;
-}
-
-.Certificates .certificates-details-card p {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 14px;
-  margin-bottom: 10px;
 }
 
 .Certificates .certificates-details-card img:hover {
@@ -527,23 +581,6 @@ section .container {
   color: #D4A853;
 }
 
-/* Open Contact Form Button */
-.contact .info-box .btn-primary {
-  background-color: #D4A853;
-  border: none;
-  color: #fff;
-  font-weight: 500;
-  padding: 10px 30px;
-  border-radius: 50px;
-  transition: 0.3s ease;
-  box-shadow: 0 2px 6px rgba(21, 187, 98, 0.4);
-}
-.contact .info-box .btn-primary:hover {
-  background-color: #D4A853;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(21, 187, 98, 0.6);
-}
-
 /*--------------------------------------------------------------
 # Credits
 --------------------------------------------------------------*/
@@ -571,4 +608,123 @@ section .container {
 }
 .credits a:hover {
   color: #fff;
+}
+
+
+/*--------------------------------------------------------------
+# Testimonials (Swiper)
+--------------------------------------------------------------*/
+#testimonials .testimonials-slider {
+  position: relative;
+  padding: 20px 10px 55px;
+}
+
+#testimonials .testimonial-item {
+  box-sizing: border-box;
+  min-height: 290px;
+  height: auto;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(212, 168, 83, 0.25);
+  border-radius: 12px;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+#testimonials .testimonial-item:hover {
+  border-color: #D4A853;
+  transform: translateY(-3px);
+}
+
+#testimonials .testimonial-item > p {
+  margin: 15px 0 25px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+  line-height: 1.8;
+  font-style: italic;
+}
+
+#testimonials .quote-icon-left {
+  display: inline-block;
+  color: #D4A853;
+  font-size: 30px;
+  line-height: 1;
+}
+
+#testimonials .testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+#testimonials .testimonial-avatar {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #D4A853;
+  border-radius: 50%;
+  background: rgba(212, 168, 83, 0.12);
+  color: #D4A853;
+  font-size: 22px;
+}
+
+#testimonials .testimonial-author h3 {
+  margin: 0 0 5px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+#testimonials .testimonial-author h4 {
+  margin: 0;
+  color: #D4A853;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+#testimonials .swiper-pagination {
+  bottom: 12px;
+}
+
+#testimonials .swiper-pagination-bullet {
+  background: #D4A853;
+  opacity: 0.45;
+}
+
+#testimonials .swiper-pagination-bullet-active {
+  opacity: 1;
+}
+
+#testimonials .swiper-button-prev,
+#testimonials .swiper-button-next {
+  width: 32px;
+  height: 32px;
+  color: #D4A853;
+}
+
+#testimonials .swiper-button-prev::after,
+#testimonials .swiper-button-next::after {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+@media (max-width: 767px) {
+  #testimonials .testimonial-item {
+    min-height: auto;
+    padding: 24px;
+  }
+
+  #testimonials .testimonials-slider {
+    padding-right: 6px;
+    padding-left: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #testimonials .testimonial-item {
+    transition: none;
+  }
 }

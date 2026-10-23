@@ -1,247 +1,122 @@
 /**
-* Template Name: Personal - v4.7.0
-* Template URL: https://bootstrapmade.com/personal-free-resume-bootstrap-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-(function() {
+ * Portfolio interactions: navigation and testimonials slider.
+ */
+(function () {
   "use strict";
 
-  /**
-   * Easy selector helper function
-   */
-  const select = (el, all = false) => {
-    el = el.trim()
-    if (all) {
-      return [...document.querySelectorAll(el)]
-    } else {
-      return document.querySelector(el)
+  const select = (selector, all = false) => {
+    const elements = document.querySelectorAll(selector);
+    return all ? [...elements] : elements[0] || null;
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const closeMobileNavigation = () => {
+    const navbar = select("#navbar");
+    const toggle = select(".mobile-nav-toggle");
+
+    if (navbar?.classList.contains("navbar-mobile")) {
+      navbar.classList.remove("navbar-mobile");
+      toggle?.classList.replace("bi-x", "bi-list");
     }
-  }
+  };
 
-  /**
-   * Easy event listener function
-   */
-  const on = (type, el, listener, all = false) => {
-    let selectEl = select(el, all)
+  // Toggle the mobile navigation menu.
+  select(".mobile-nav-toggle")?.addEventListener("click", function () {
+    const navbar = select("#navbar");
+    if (!navbar) return;
 
-    if (selectEl) {
-      if (all) {
-        selectEl.forEach(e => e.addEventListener(type, listener))
-      } else {
-        selectEl.addEventListener(type, listener)
-      }
-    }
-  }
+    navbar.classList.toggle("navbar-mobile");
+    this.classList.toggle("bi-list");
+    this.classList.toggle("bi-x");
+  });
 
-  /**
-   * Scrolls to an element with header offset
-   */
-  const scrollto = (el) => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    })
-  }
+  // Switch between the portfolio sections when a navigation link is clicked.
+  select("#navbar .nav-link", true).forEach((link) => {
+    link.addEventListener("click", function (event) {
+      const target = select(this.hash);
+      if (!target) return;
 
-  /**
-   * Mobile nav toggle
-   */
-  on('click', '.mobile-nav-toggle', function(e) {
-    select('#navbar').classList.toggle('navbar-mobile')
-    this.classList.toggle('bi-list')
-    this.classList.toggle('bi-x')
-  })
+      event.preventDefault();
 
-  /**
-   * Scrool with ofset on links with a class name .scrollto
-   */
-  on('click', '#navbar .nav-link', function(e) {
-    let section = select(this.hash)
-    if (section) {
-      e.preventDefault()
+      const header = select("#header");
+      const sections = select("section", true);
+      select("#navbar .nav-link", true).forEach((item) => {
+        item.classList.toggle("active", item === this);
+      });
 
-      let navbar = select('#navbar')
-      let header = select('#header')
-      let sections = select('section', true)
-      let navlinks = select('#navbar .nav-link', true)
+      closeMobileNavigation();
+      if (!header) return;
 
-      navlinks.forEach((item) => {
-        item.classList.remove('active')
-      })
-
-      this.classList.add('active')
-
-      if (navbar.classList.contains('navbar-mobile')) {
-        navbar.classList.remove('navbar-mobile')
-        let navbarToggle = select('.mobile-nav-toggle')
-        navbarToggle.classList.toggle('bi-list')
-        navbarToggle.classList.toggle('bi-x')
-      }
-
-      if (this.hash == '#header') {
-        header.classList.remove('header-top')
-        sections.forEach((item) => {
-          item.classList.remove('section-show')
-        })
+      if (this.hash === "#header") {
+        header.classList.remove("header-top");
+        sections.forEach((section) => section.classList.remove("section-show"));
+        scrollToTop();
         return;
       }
 
-      if (!header.classList.contains('header-top')) {
-        header.classList.add('header-top')
-        setTimeout(function() {
-          sections.forEach((item) => {
-            item.classList.remove('section-show')
-          })
-          section.classList.add('section-show')
+      const showTarget = () => {
+        sections.forEach((section) => section.classList.remove("section-show"));
+        target.classList.add("section-show");
+      };
 
-        }, 350);
+      if (!header.classList.contains("header-top")) {
+        header.classList.add("header-top");
+        window.setTimeout(showTarget, 350);
       } else {
-        sections.forEach((item) => {
-          item.classList.remove('section-show')
-        })
-        section.classList.add('section-show')
+        showTarget();
       }
 
-      scrollto(this.hash)
-    }
-  }, true)
-
-  /**
-   * Activate/show sections on load with hash links
-   */
-  window.addEventListener('load', () => {
-    if (window.location.hash) {
-      let initial_nav = select(window.location.hash)
-
-      if (initial_nav) {
-        let header = select('#header')
-        let navlinks = select('#navbar .nav-link', true)
-
-        header.classList.add('header-top')
-
-        navlinks.forEach((item) => {
-          if (item.getAttribute('href') == window.location.hash) {
-            item.classList.add('active')
-          } else {
-            item.classList.remove('active')
-          }
-        })
-
-        setTimeout(function() {
-          initial_nav.classList.add('section-show')
-        }, 350);
-
-        scrollto(window.location.hash)
-      }
-    }
+      scrollToTop();
+    });
   });
 
-  /**
-   * Skills animation
-   */
-  let skilsContent = select('.skills-content');
-  if (skilsContent) {
-    new Waypoint({
-      element: skilsContent,
-      offset: '80%',
-      handler: function(direction) {
-        let progress = select('.progress .progress-bar', true);
-        progress.forEach((el) => {
-          el.style.width = el.getAttribute('aria-valuenow') + '%'
-        });
-      }
-    })
-  }
+  // Open a section directly when the page loads with a section hash.
+  window.addEventListener("load", () => {
+    const hash = window.location.hash;
+    if (!hash) return;
 
-  /**
-   * Testimonials slider
-   */
-  new Swiper('.testimonials-slider', {
-    speed: 600,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    slidesPerView: 'auto',
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    },
-    breakpoints: {
-      320: {
-        slidesPerView: 1,
-        spaceBetween: 20
+    const target = select(hash);
+    if (!target) return;
+
+    select("#header")?.classList.add("header-top");
+    select("#navbar .nav-link", true).forEach((link) => {
+      link.classList.toggle("active", link.getAttribute("href") === hash);
+    });
+
+    window.setTimeout(() => target.classList.add("section-show"), 350);
+    scrollToTop();
+  });
+
+  // Responsive testimonials carousel.
+  const testimonialsSlider = select(".testimonials-slider");
+  if (testimonialsSlider && typeof Swiper !== "undefined") {
+    new Swiper(testimonialsSlider, {
+      speed: 600,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true
       },
-
-      1200: {
-        slidesPerView: 3,
-        spaceBetween: 20
-      }
-    }
-  });
-
-  /**
-   * Porfolio isotope and filter
-   */
-  window.addEventListener('load', () => {
-    let portfolioContainer = select('.portfolio-container');
-    if (portfolioContainer) {
-      let portfolioIsotope = new Isotope(portfolioContainer, {
-        itemSelector: '.portfolio-item',
-        layoutMode: 'fitRows'
-      });
-
-      let portfolioFilters = select('#portfolio-flters li', true);
-
-      on('click', '#portfolio-flters li', function(e) {
-        e.preventDefault();
-        portfolioFilters.forEach(function(el) {
-          el.classList.remove('filter-active');
-        });
-        this.classList.add('filter-active');
-
-        portfolioIsotope.arrange({
-          filter: this.getAttribute('data-filter')
-        });
-      }, true);
-    }
-
-  });
-
-  /**
-   * Initiate portfolio lightbox 
-   */
-  const portfolioLightbox = GLightbox({
-    selector: '.portfolio-lightbox'
-  });
-
-  /**
-   * Initiate portfolio details lightbox 
-   */
-  const portfolioDetailsLightbox = GLightbox({
-    selector: '.portfolio-details-lightbox',
-    width: '90%',
-    height: '90vh'
-  });
-
-  /**
-   * Portfolio details slider
-   */
-  new Swiper('.portfolio-details-slider', {
-    speed: 400,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    }
-  });
-
-})()
+      slidesPerView: 1,
+      spaceBetween: 20,
+      pagination: {
+        el: testimonialsSlider.querySelector(".swiper-pagination"),
+        type: "bullets",
+        clickable: true
+      },
+      navigation: {
+        nextEl: testimonialsSlider.querySelector(".swiper-button-next"),
+        prevEl: testimonialsSlider.querySelector(".swiper-button-prev")
+      },
+      breakpoints: {
+        768: { slidesPerView: 2, spaceBetween: 20 },
+        1200: { slidesPerView: 3, spaceBetween: 20 }
+      },
+      a11y: { enabled: true }
+    });
+  }
+})();
